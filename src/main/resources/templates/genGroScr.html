@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8"/>
+	<title>generate groovy script</title>
+	<link rel="stylesheet" th:href="@{css/bootstrap.min.css}"/>
+	<link rel="stylesheet" th:href="@{css/groovyScript/genGroScr.css}"/>
+</head>
+
+<body>
+	<h3 align="center">请输入</h3> 
+	<div class="container">
+		<form class="form-signin" th:action="@{/genGroScr}" method="post">
+			<input class="form-control" type="text" placeholder="Github url" name="githubUrl">
+			<input class="form-control" type="text" placeholder="Maven build ..." name="mavenBuild">
+			<button class="btn btn-lg btn-primary btn-block" type="submit">提交</button>
+		</form>
+	</div>
+</body>
+</html>
