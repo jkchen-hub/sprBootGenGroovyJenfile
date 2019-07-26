@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8"/>
+	<title>Login</title>
+		<link rel="stylesheet" th:href="@{css/bootstrap.min.css}"/>
+	<link rel="stylesheet" th:href="@{css/groovyScript/genGroScr.css}"/>
+</head>
+
+<body>
+	<h3 align="center">这是一个带有登录框的主页</h3> 
+	<div class="container">
+		<form class="form-signin" th:action="@{/login}" method="get">
+			<input type="text" class="form-control" placeholder="账号" name="username">
+			<input type="password" class="form-control" placeholder="密码" name="password">
+			<button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+		</form>
+	</div>
+</body>
+</html>
