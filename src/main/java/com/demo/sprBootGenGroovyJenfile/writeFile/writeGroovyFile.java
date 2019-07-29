@@ -6,31 +6,54 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
 import java.util.List;
-
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.ResourceUtils;
 
-public class writeFile {
-
-	/**
-	   *  在当前SpringBoot项目根目录下，写groovy脚本文件，文件名为Jenkinsfile.txt
-	 * @author jkchen
-	 * @2019-7-23
-	 */
+/**
+ * 在当前SpringBoot项目根目录下，写groovy脚本文件，文件名为Jenkinsfile.txt
+ * @author jkchen
+ * @2019-7-23
+ */
+public class writeGroovyFile {
+	
 	public String writeJenFile(List<String> JenkinsfileList) {
 	    try {
 			String basePath = getResourceBasePath();
 	        String studentResourcePath = new File(basePath, "Jenkinsfile.txt").getAbsolutePath();
-	        // 保证目录一定存在
-	        ensureDirectory(studentResourcePath);
-	        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(studentResourcePath)));
-	        for (String str : JenkinsfileList) {
-	            StringBuffer buffer = new StringBuffer();
-	            buffer.append(str);
-	            buffer.append("\r\n");
-	            writer.write(buffer.toString());
-	        } 
+	        
+	        ensureDirectory(studentResourcePath); // 保证目录一定存在
+	        BufferedWriter writer = new BufferedWriter(
+	        		new OutputStreamWriter(new FileOutputStream(studentResourcePath)));
+	        
+	        String githuburl = JenkinsfileList.get(0);
+	        String mavenbuild = JenkinsfileList.get(1);
+	        //StringBuilder builder = new StringBuilder();
+	        //builder.append("node {");
+	        List<String> groovyStrArr = new ArrayList<String>();
+	        groovyStrArr.add("node {");
+	        groovyStrArr.add("def mvnHome");
+	        groovyStrArr.add("stage('Preparation') {");
+	        groovyStrArr.add("git '" + githuburl + "'");
+	        groovyStrArr.add("mvnHome = tool 'apache server maven'");
+	        groovyStrArr.add("}");
+	        groovyStrArr.add("stage('Build') {");
+	        groovyStrArr.add("withEnv([\"MVN_HOME=$mvnHome\"]) {");
+	        groovyStrArr.add("sh '\"$MVN_HOME/bin/mvn\" -Dmaven.test.failure.ignore " + mavenbuild +"'");
+	        groovyStrArr.add("}");
+	        groovyStrArr.add("}");
+	        groovyStrArr.add("}");
+	        groovyStrArr.add("stage('Results') {");
+	        groovyStrArr.add("junit '**/target/surefire-reports/TEST-*.xml'");
+	        groovyStrArr.add("archiveArtifacts 'target/*.jar'");
+	        groovyStrArr.add("}");
+	        groovyStrArr.add("}");
+	        
+	        // 循环将List集合中的字符串写到groovy文件中
+	        for (String str : groovyStrArr) {
+	        	writer.write(str + "\r\n");
+	        }
 	        writer.flush();
 	        writer.close();
 	        return studentResourcePath;//成功读写时，返回文件Jenkinsfile.txt路径
