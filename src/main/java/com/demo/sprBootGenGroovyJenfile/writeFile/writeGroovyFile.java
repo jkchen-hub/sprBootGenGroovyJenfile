@@ -12,7 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.ResourceUtils;
 
 /**
- * 在当前SpringBoot项目根目录下，写groovy脚本文件，文件名为Jenkinsfile.txt
+ * 在当前Spring Boot项目根目录下，写groovy脚本文件，文件名为Jenkinsfile.txt
  * @author jkchen
  * @2019-7-23
  */
@@ -41,7 +41,6 @@ public class writeGroovyFile {
 	        groovyStrArr.add("stage('Build') {");
 	        groovyStrArr.add("withEnv([\"MVN_HOME=$mvnHome\"]) {");
 	        groovyStrArr.add("sh '\"$MVN_HOME/bin/mvn\" -Dmaven.test.failure.ignore " + mavenbuild +"'");
-	        groovyStrArr.add("}");
 	        groovyStrArr.add("}");
 	        groovyStrArr.add("}");
 	        groovyStrArr.add("stage('Results') {");
