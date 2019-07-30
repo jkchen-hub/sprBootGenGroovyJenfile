@@ -54,9 +54,9 @@ public class sprBootGenGroovyJenfileCon {
 		/**
 		 * 获得输入的github url和maven build信息，并加入到输出的groovy脚本文件中
 		 * 注意：这里的groovyScript类中的变量名（githubUrl，mavenBuild）应该与前端页面中
-		 * 的inout标签中的name属性保持一致，否则会写入null值
+		 * 的input标签中的name属性保持一致，否则会写入null值
 		 */
-		String githubUrl = Jenkinsfile.getGithubUrl();
+		String githubUrl = Jenkinsfile.getGithubUrl();  //获得前端输入的github地址信息
 		String mavenBuild = Jenkinsfile.getMavenBuild();
 //		System.out.println(Jenkinsfile.toString());
 		List<String> jenkinsfileList = new ArrayList<String>();
