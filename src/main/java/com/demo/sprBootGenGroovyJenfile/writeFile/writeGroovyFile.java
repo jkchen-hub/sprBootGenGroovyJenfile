@@ -67,7 +67,7 @@ public class writeGroovyFile {
 	/**
 	 * 获取项目根路径
 	 * 
-	 * @return
+	 * @return pathStr
 	 */
     private static String getResourceBasePath() {
         // 获取根目录

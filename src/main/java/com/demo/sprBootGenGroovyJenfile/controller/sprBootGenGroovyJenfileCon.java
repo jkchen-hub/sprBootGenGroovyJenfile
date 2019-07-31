@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.demo.sprBootGenGroovyJenfile.domain.groovyScript;
 import com.demo.sprBootGenGroovyJenfile.writeFile.writeGroovyFile;
 
+import groovy.lang.Binding;
+import groovy.lang.Script;
+import groovy.util.GroovyScriptEngine;
+
 /**
  * 生成groovy脚本文件，命名为Jenkinsfile.txt，并保存到项目根目录下
  * 
@@ -51,6 +55,21 @@ public class sprBootGenGroovyJenfileCon {
 		 * 实例化文件writeFile类，成功读写后，返回文件路径；否则返回错误信息
 		 */
 		String jenkinsfilePath = new writeGroovyFile().writeJenFile(jenkinsfileList);
+		
+		/**
+		 * 功能未实现
+		 * 动态调用groovy脚本文件，将生成的Jenkinsfile.txt文件上传到知道github
+		 */
 		System.out.println(jenkinsfilePath);
+        try{
+            String path= "src/main/java/com/demo/sprBootGenGroovyJenfile/writeFile";
+            GroovyScriptEngine engine = new GroovyScriptEngine(path);
+            Script script = engine.createScript("autoGithubPush.groovy", new Binding());
+            String str = (String) script.invokeMethod("autoGithubPush", githubUrl);
+            System.out.println(str);
+        }
+        catch (Exception ex){
+            System.out.println(ex.getMessage().toString());
+        }
 	}
 }
