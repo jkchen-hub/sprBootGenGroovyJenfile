@@ -17,18 +17,18 @@ import org.springframework.util.ResourceUtils;
 /**
  * 在当前SpringBoot项目根目录下，写groovy脚本文件，文件名为Jenkinsfile.txt
  * 
- * @author jkchen @2019-7-23
+ * @author jkchen 
+ * @2019-7-23
  */
 public class readWriteFile {
 
 	public String writeJenFile(List<String> JenkinsfileList) {
-//		try {
-			String basePath = getResourceBasePath();
-			// 获取文件路径
-			String studentResourcePath = new File(basePath, "Jenkinsfile.txt").getAbsolutePath();
-			ensureDirectory(studentResourcePath); // 保证目录一定存在
-			changeLine(studentResourcePath, JenkinsfileList);
-			return studentResourcePath;  //返回文件路径
+		String basePath = getResourceBasePath();
+		// 获取文件路径
+		String studentResourcePath = new File(basePath, "Jenkinsfile.txt").getAbsolutePath();
+		ensureDirectory(studentResourcePath); // 保证目录一定存在
+		changeLine(studentResourcePath, JenkinsfileList);
+		return studentResourcePath;  // 返回文件路径
 	}
 
 	/**

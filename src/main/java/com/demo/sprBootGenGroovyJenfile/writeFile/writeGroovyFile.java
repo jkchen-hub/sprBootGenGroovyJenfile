@@ -29,9 +29,10 @@ public class writeGroovyFile {
 	        
 	        String githuburl = JenkinsfileList.get(0);
 	        String mavenbuild = JenkinsfileList.get(1);
-	        //StringBuilder builder = new StringBuilder();
-	        //builder.append("node {");
-	        List<String> groovyStrArr = new ArrayList<String>();
+	        List<String> groovyStrArr = new ArrayList<>();
+	        /**
+	         * 将groovy文件中一些固定的字符串添加到List集合中
+	         */
 	        groovyStrArr.add("node {");
 	        groovyStrArr.add("def mvnHome");
 	        groovyStrArr.add("stage('Preparation') {");
@@ -49,7 +50,9 @@ public class writeGroovyFile {
 	        groovyStrArr.add("}");
 	        groovyStrArr.add("}");
 	        
-	        // 循环将List集合中的字符串写到groovy文件中
+	        /**
+	         * 循环将List集合中的字符串写到groovy文件中
+	         */
 	        for (String str : groovyStrArr) {
 	        	writer.write(str + "\r\n");
 	        }

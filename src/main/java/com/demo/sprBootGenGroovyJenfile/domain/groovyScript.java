@@ -1,9 +1,20 @@
 package com.demo.sprBootGenGroovyJenfile.domain;
 
+/**
+ * 
+ * @author jkchen
+ *
+ */
 public class groovyScript {
-
+	
+	/**
+	 * github 地址
+	 */
 	private String githubUrl;
 
+	/**
+	 * maven命令
+	 */
 	private String mavenBuild;
 	
 	public String getGithubUrl() {
@@ -19,10 +30,12 @@ public class groovyScript {
 		this.mavenBuild = mavenBuild;
 	}
 	
-	//重写toString方法
+	/**
+	 * 重写toString()方法
+	 */
 	@Override
 	public String toString() {
-		return "Github Url: " + getGithubUrl() + ", maven项目命令是：" + getMavenBuild();
+		return "Github Url: " + getGithubUrl() + ", Maven build：" + getMavenBuild();
 	}
 	
 }
