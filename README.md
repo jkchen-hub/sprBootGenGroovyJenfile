@@ -1,0 +1,2 @@
+# sprBootGenGroovyJenfile
+用spring boot生成groovy脚本文件
