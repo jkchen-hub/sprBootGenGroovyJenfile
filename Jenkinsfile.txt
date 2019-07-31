@@ -6,7 +6,7 @@ mvnHome = tool 'apache server maven'
 }
 stage('Build') {
 withEnv(["MVN_HOME=$mvnHome"]) {
-sh '"$MVN_HOME/bin/mvn" -Dmaven.test.failure.ignore mvn clean package'
+sh '"$MVN_HOME/bin/mvn" -Dmaven.test.failure.ignore clean package'
 }
 }
 stage('Results') {
